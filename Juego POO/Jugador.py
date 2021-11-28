@@ -24,8 +24,8 @@ class Jugador:
         self.x = x
         self.y = y
         self.velocidad = 15
-        self.ancho = self.quieto.get_width()/2
-        self.alto = self.quieto.get_height()/2
+        self.ancho = self.quieto.get_width()//2
+        self.alto = self.quieto.get_height()//2
  
     def dibujar(self, cuadro):
         #cuadro.blit(self.quieto, (self.x, self.y))

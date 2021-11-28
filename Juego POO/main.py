@@ -31,7 +31,7 @@ if __name__ == "__main__":
     while repetir:
 
 	    # Inicializacion de elementos del juego
-        Dr = Jugador(int(0), int(0), "img/Dr/", ventana_x)
+        Dr = Jugador(int(0), int(0), "Juego POO/img/Dr/", ventana_x)
         
        
         
@@ -56,5 +56,3 @@ if __name__ == "__main__":
             
             
             refresh()
-            
-
