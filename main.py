@@ -33,8 +33,8 @@ if __name__ == "__main__":
 
 	    # Inicializacion de elementos del juego
         Dr = Jugador(int(0), int(0), "img/Dr/", ventana_x)
-        Virus = Jugador(int(300), int(300), "img/Virus/", ventana_x)
-
+        Virus = Jugador(int(600), int(300), "img/Virus/", ventana_x)
+        
        
         
 
@@ -54,9 +54,10 @@ if __name__ == "__main__":
             #Detectar teclas presionadas
             k = pygame.key.get_pressed()
             #Movimiento jugador(es)
-            Dr.move(k, pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, ventana_x, ventana_y)
             Virus.move(k, pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, ventana_x, ventana_y)
-
+            Dr.move(k, pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, ventana_x, ventana_y)
+            
+            
             refresh()
             
 
