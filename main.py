@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
         esta_jugando=True
         while esta_jugando:
-
+            print(Dr.contador_pasos)
             ventana.fill((0,0,0))
 
             # Control de velocidad del juego
