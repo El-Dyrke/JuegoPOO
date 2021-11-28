@@ -56,5 +56,8 @@ if __name__ == "__main__":
             
             
             refresh()
+
+
+            print("XD")
             
 
