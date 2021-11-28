@@ -1,6 +1,7 @@
 #import Proyectil
 import pygame
 pygame.init()
+# a
 
 class Jugador:
     def __init__(self, x, y, fuente, limite):#fuente Dr= img/Dr/ virus= img/Virus/
