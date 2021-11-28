@@ -34,17 +34,14 @@ if __name__ == "__main__":
 	    # Inicializacion de elementos del juego
         Dr = Jugador(int(0), int(0), "img/Dr/", ventana_x)
         Virus = Jugador(int(600), int(300), "img/Virus/", ventana_x)
-        
-       
-        
 
         esta_jugando=True
         while esta_jugando:
-
+            print(Dr.contador_pasos)
             ventana.fill((0,0,0))
 
             # Control de velocidad del juego
-            reloj.tick(27)
+            reloj.tick(30)
 
             # Evento de boton de cierre de ventana
             for evento in pygame.event.get():
@@ -53,11 +50,15 @@ if __name__ == "__main__":
 
             #Detectar teclas presionadas
             k = pygame.key.get_pressed()
-            #Movimiento jugador(es)
+            #Movimiento jugadores
             Virus.move(k, pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, ventana_x, ventana_y)
             Dr.move(k, pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, ventana_x, ventana_y)
             
-            
+            # Cerrar el jugo con "esc"
+            if k[pygame.K_ESCAPE]:
+                quit() 
+
+            # Repintar
             refresh()
             
 
