@@ -13,7 +13,7 @@ class Jugador:
         self.va_abajo = False
 
         #Sprites
-        self.quieto = pygame.image.load(fuente+"arriba1.png")
+        self.quieto = pygame.image.load(fuente+"derecha1.png")
         self.camina_derecha = [pygame.image.load(fuente + "derecha1.png"), pygame.image.load(fuente + "derecha2.png"), pygame.image.load(fuente + "derecha3.png")]
 
         self.camina_izquierda = [pygame.image.load(fuente + "izq1.png"), pygame.image.load(fuente + "izq2.png"), pygame.image.load(fuente + "izq3.png")]
@@ -30,7 +30,7 @@ class Jugador:
         self.vida = 5
         self.x = x
         self.y = y
-        self.velocidad = 15
+        self.velocidad = 9
         self.ancho = self.quieto.get_width()//2
         self.alto = self.quieto.get_height()//2
 
@@ -43,22 +43,22 @@ class Jugador:
         
  
     def dibujar(self, cuadro):
+
+        if self.contador_pasos + 1 > 0:
+            self.contador_pasos = 0
+
         if self.va_izquierda:
-            self.escalar(self.camina_izquierda[self.contador_pasos], cuadro)
+            cuadro.blit(pygame.transform.scale(self.camina_izquierda[self.contador_pasos], (self.ancho,self.alto)),(self.x,self.y))
             self.contador_pasos += 1
-            self.parche()
         elif self.va_derecha:
             self.escalar(self.camina_derecha[self.contador_pasos], cuadro)
             self.contador_pasos += 1
-            self.parche()
         elif self.va_arriba:
             self.escalar(self.camina_arriba[self.contador_pasos], cuadro)
             self.contador_pasos += 1
-            self.parche()
         elif self.va_abajo:
             self.escalar(self.camina_abajo[self.contador_pasos], cuadro)
             self.contador_pasos += 1
-            self.parche()
         else:
             self.escalar(self.quieto,cuadro)
             self.contador_pasos = 0
