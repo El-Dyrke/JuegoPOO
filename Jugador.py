@@ -6,7 +6,7 @@ class Jugador:
     def __init__(self, x, y, fuente, limite):#fuente Dr= img/Dr/ virus= img/Virus/
 
         #Movimiento
-        self.camino = [100, limite]
+        #self.camino = [100, limite]
         self.va_izquierda = False
         self.va_derecha = False
         self.va_arriba = False
@@ -22,6 +22,8 @@ class Jugador:
 
         self.camina_abajo = [pygame.image.load(fuente + "abajo1.png"), pygame.image.load(fuente + "abajo2.png"), pygame.image.load(fuente + "abajo3.png")]
 
+        self.contador_pasos = 0
+
         #Disparar
         #self.balas = 3
         #self.bala = Proyectil(5)
@@ -34,9 +36,6 @@ class Jugador:
         self.ancho = self.quieto.get_width()//2
         self.alto = self.quieto.get_height()//2
 
-    def parche(self):
-        if self.contador_pasos > 2:
-            self.contador_pasos = 0
 
     def escalar(self, imagen, cuadro):
         cuadro.blit(pygame.transform.scale(imagen, (self.ancho,self.alto)),(self.x,self.y))
@@ -44,21 +43,27 @@ class Jugador:
  
     def dibujar(self, cuadro):
 
-        if self.contador_pasos + 1 > 0:
+        if self.contador_pasos + 1 > 15:
             self.contador_pasos = 0
 
         if self.va_izquierda:
-            cuadro.blit(pygame.transform.scale(self.camina_izquierda[self.contador_pasos], (self.ancho,self.alto)),(self.x,self.y))
+            
+            self.escalar(self.camina_izquierda[self.contador_pasos//5], cuadro)
             self.contador_pasos += 1
+            
         elif self.va_derecha:
-            self.escalar(self.camina_derecha[self.contador_pasos], cuadro)
+            self.escalar(self.camina_derecha[self.contador_pasos//5], cuadro)
             self.contador_pasos += 1
+            
         elif self.va_arriba:
-            self.escalar(self.camina_arriba[self.contador_pasos], cuadro)
+            self.escalar(self.camina_arriba[self.contador_pasos//5], cuadro)
             self.contador_pasos += 1
+            
         elif self.va_abajo:
-            self.escalar(self.camina_abajo[self.contador_pasos], cuadro)
+            
+            self.escalar(self.camina_abajo[self.contador_pasos//5], cuadro)
             self.contador_pasos += 1
+            
         else:
             self.escalar(self.quieto,cuadro)
             self.contador_pasos = 0
@@ -85,7 +90,7 @@ class Jugador:
         else:			
             self.va_izquierda = False
             self.va_derecha = False
-            self.contador_pasos = 0
+
         
         # Movimiento a arriba 
         if k[u] and self.y > self.velocidad:
@@ -101,7 +106,7 @@ class Jugador:
         else:
             self.va_arriba = False
             self.va_abajo = False
-            self.contador_pasos = 0
+
 
 
     def disparar(self):
