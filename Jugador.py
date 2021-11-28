@@ -46,12 +46,8 @@ class Jugador:
         if self.contador_pasos + 1 > 15:
             self.contador_pasos = 0
         if self.va_izquierda:
-<<<<<<< HEAD
             
             self.escalar(self.camina_izquierda[self.contador_pasos//5], cuadro)
-=======
-            cuadro.blit(pygame.transform.scale(self.camina_izquierda[self.contador_pasos//5], (self.ancho,self.alto)),(self.x,self.y))
->>>>>>> 7177eb22f19ebbaeb7f9dbb6ae8f865d5dbe9aef
             self.contador_pasos += 1
             
         elif self.va_derecha:
@@ -63,10 +59,6 @@ class Jugador:
             self.contador_pasos += 1
             
         elif self.va_abajo:
-<<<<<<< HEAD
-            
-=======
->>>>>>> 7177eb22f19ebbaeb7f9dbb6ae8f865d5dbe9aef
             self.escalar(self.camina_abajo[self.contador_pasos//5], cuadro)
             self.contador_pasos += 1
             
@@ -95,12 +87,7 @@ class Jugador:
         # Detenerse horizontal
         else:			
             self.va_izquierda = False
-            self.va_derecha = False
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> 7177eb22f19ebbaeb7f9dbb6ae8f865d5dbe9aef
+            self.va_derecha = False        
         
         # Movimiento a arriba 
         if k[u] and self.y > self.velocidad:
@@ -116,12 +103,6 @@ class Jugador:
         else:
             self.va_arriba = False
             self.va_abajo = False
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> 7177eb22f19ebbaeb7f9dbb6ae8f865d5dbe9aef
-
 
     def disparar(self):
         #A definir en el proximo avance pues requiere PyGame
