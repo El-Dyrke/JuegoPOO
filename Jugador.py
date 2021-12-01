@@ -1,4 +1,4 @@
-#import Proyectil
+import Proyectil
 import pygame
 pygame.init()
 
@@ -13,20 +13,14 @@ class Jugador:
         self.va_abajo = False
         self.contador_pasos= 0
         #Sprites
+        self.fuente = fuente
         self.quieto = pygame.image.load(fuente+"derecha1.png")
         self.camina_derecha = [pygame.image.load(fuente + "derecha1.png"), pygame.image.load(fuente + "derecha2.png"), pygame.image.load(fuente + "derecha3.png")]
-
         self.camina_izquierda = [pygame.image.load(fuente + "izq1.png"), pygame.image.load(fuente + "izq2.png"), pygame.image.load(fuente + "izq3.png")]
-
         self.camina_arriba = [pygame.image.load(fuente + "arriba1.png"), pygame.image.load(fuente + "arriba2.png"), pygame.image.load(fuente + "arriba3.png")]
-
         self.camina_abajo = [pygame.image.load(fuente + "abajo1.png"), pygame.image.load(fuente + "abajo2.png"), pygame.image.load(fuente + "abajo3.png")]
 
         self.contador_pasos = 0
-
-        #Disparar
-        #self.balas = 3
-        #self.bala = Proyectil(5)
 
         #Atributos
         self.vida = 5
@@ -36,10 +30,13 @@ class Jugador:
         self.ancho = self.quieto.get_width()//2
         self.alto = self.quieto.get_height()//2
 
+         #Disparar
+        self.ronda = 0
+        self.max_disparos= 3
+        self.balas = []
 
     def escalar(self, imagen, cuadro):
         cuadro.blit(pygame.transform.scale(imagen, (self.ancho,self.alto)),(self.x,self.y))
-        
  
     def dibujar(self, cuadro):
 
@@ -103,8 +100,3 @@ class Jugador:
         else:
             self.va_arriba = False
             self.va_abajo = False
-
-    def disparar(self):
-        #A definir en el proximo avance pues requiere PyGame
-        #Usa self.f para accionar el disparo
-        pass

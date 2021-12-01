@@ -1,14 +1,15 @@
+from pygame.constants import K_x
 from Jugador import Jugador
 from Mapa import Mapa
-from Partida import Partida
-#from Proyectil import Proyectil
+#from Partida import Partida
+from Proyectil import Proyectil
 import pygame
 
 pygame.init()
 
 if __name__ == "__main__":
     
-     # ----------- Declarar constantes -------------------------
+        # ----------- Declarar constantes -------------------------
     ventana_x = 1050
     ventana_y = 650
     ventana = pygame.display.set_mode((ventana_x,ventana_y))
@@ -18,11 +19,48 @@ if __name__ == "__main__":
     fuente=pygame.font.SysFont("segoe print", 22)
     puntaje = 0
 
+    def disparar(k,f, self, tanda, balas, default, maximo):
+        # Manejo de los disparos
+        if tanda > 0:
+            tanda += 1
+        if tanda > 3:
+            tanda = 0
+
+        #contacto de proyectil con el villano
+        for bala in balas:
+            """if villano.se_encuentra_con(bala):
+                sonido_golpe.play() # al momento de impactar en el villano
+                bala.impacta_a(villano)
+                balas.pop(balas.index(bala)) # se elimina la bala del impacto"""
+
+            # movimiento de la bala dentro de los limites de la ventana
+            if bala.x < ventana_x and bala.x > 0:
+                bala.x += bala.velocidad
+            else:
+                balas.pop(balas.index(bala)) # se elimina la bala fuera de la ventana
+
+        # capturar evento del disparo
+        if k[f] and tanda == 0:
+            if self.va_izquierda:
+                direccion = -1
+            elif self.va_derecha:
+                direccion = 1
+            else:
+                direccion = default
+
+            if len(balas) < maximo: # balas en pantalla
+                balas.append(Proyectil(round(self.x + self.ancho // 2), round(self.y + self.alto // 2), direccion, self.fuente))
+            tanda = 1
+
     # ----------------  Función para repintar el cuadro de juego -----------------
     def refresh():
         ventana.fill((107,171,242))
         Dr.dibujar(ventana)
         Virus.dibujar(ventana)
+        for bala in balas_Dr:
+            bala.dibujar(ventana)
+        for bala in balas_Virus:
+            bala.dibujar(ventana)
         pygame.display.update()
 
     # Variable que controla la repeticion del juego completo con todas sus pantallas
@@ -35,9 +73,14 @@ if __name__ == "__main__":
         Dr = Jugador(int(0), int(0), "img/Dr/", ventana_x)
         Virus = Jugador(int(600), int(300), "img/Virus/", ventana_x)
 
+        tanda_Dr = 0
+        balas_Dr=[]
+        
+        tanda_Virus = 0
+        balas_Virus = []
+
         esta_jugando=True
         while esta_jugando:
-            print(Dr.contador_pasos)
             ventana.fill((0,0,0))
 
             # Control de velocidad del juego
@@ -53,10 +96,16 @@ if __name__ == "__main__":
             #Movimiento jugadores
             Virus.move(k, pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, ventana_x, ventana_y)
             Dr.move(k, pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, ventana_x, ventana_y)
+
+            #Disparar
+            #Dr.disparar(k, pygame.K_c)
             
             # Cerrar el jugo con "esc"
             if k[pygame.K_ESCAPE]:
                 quit() 
+
+            disparar(k, pygame.K_x , Dr, tanda_Dr, balas_Dr, 1, 3)
+            disparar(k,pygame.K_RCTRL, Virus, tanda_Virus, balas_Virus, -1, 3)
 
             # Repintar
             refresh()

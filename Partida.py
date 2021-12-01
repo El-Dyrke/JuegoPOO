@@ -1,11 +1,14 @@
+"""import pygame
 import Jugador
+import Proyectil
 import Mapa
+pygame.init()
 
 class Partida:
     def __init__(self, rondas):
-        self.jugador1 = Jugador("up","dwn","iz","der")
-        self.jugador2 = Jugador("up","dwn","iz","der")
+        self.Dr = Jugador(int(0), int(0), "img/Dr/", 1050)
+        self.Virus = Jugador(int(600), int(300), "img/Virus/", 1050)
         #Los argumentos seran elementos de pygame correspondientes a las teclas de movimiento
-        paredes = ("x1", "y1", "x2", "y2")
-        self.Map = Mapa(paredes)
+        
         self.rondas = rondas #Define el n° de rondas a jugar
+"""
