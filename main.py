@@ -18,14 +18,14 @@ if __name__ == "__main__":
     negro = (0,0,0)
     fuente=pygame.font.SysFont("segoe print", 22)
     puntaje = 0
-
+    timer = 0 #Para la velocidad de disparo
     def disparar(k,f, self, tanda, balas, default, maximo):
+        maximo=3
         # Manejo de los disparos
         if tanda > 0:
             tanda += 1
         if tanda > 3:
             tanda = 0
-
         #contacto de proyectil con el villano
         for bala in balas:
             """if villano.se_encuentra_con(bala):
@@ -40,7 +40,7 @@ if __name__ == "__main__":
                 balas.pop(balas.index(bala)) # se elimina la bala fuera de la ventana
 
         # capturar evento del disparo
-        if k[f] and tanda == 0:
+        if k[f] and tanda == 0 and timer%4==0:
             if self.va_izquierda:
                 direccion = -1
             elif self.va_derecha:
@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
     # ------------------------- Ciclo de repeticion de todo el juego ---------------------------
     while repetir:
-
+        
 	    # Inicializacion de elementos del juego
         Dr = Jugador(int(0), int(0), "img/Dr/", ventana_x)
         Virus = Jugador(int(600), int(300), "img/Virus/", ventana_x)
@@ -81,8 +81,11 @@ if __name__ == "__main__":
 
         esta_jugando=True
         while esta_jugando:
+            timer+=1
+            if timer==16: #Evita que el timer se salga de control LOL
+                timer=0
             ventana.fill((0,0,0))
-
+            print(timer)
             # Control de velocidad del juego
             reloj.tick(30)
 
