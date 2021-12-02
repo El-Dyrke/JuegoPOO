@@ -1,4 +1,5 @@
 import pygame
+import Jugador
 pygame.init()
 
 class Proyectil:
@@ -8,9 +9,10 @@ class Proyectil:
         self.y = y
         
         self.velocidad = 15 * direccion
-
-        self.imagen= pygame.image.load(fuente+"disparo1.png")
-
+        if direccion==1:
+            self.imagen= pygame.image.load(fuente+"disparo1.png")
+        if direccion==-1:
+            self.imagen= pygame.image.load(fuente+"disparo2.png")
         self.ancho = self.imagen.get_width()//4
         self.alto = self.imagen.get_height()//4
         #pygame.transform.scale(imagen, (self.ancho,self.alto)
