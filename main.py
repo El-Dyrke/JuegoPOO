@@ -28,10 +28,10 @@ if __name__ == "__main__":
             tanda = 0
         #contacto de proyectil con el villano
         for bala in balas:
-            """if villano.se_encuentra_con(bala):
-                sonido_golpe.play() # al momento de impactar en el villano
-                bala.impacta_a(villano)
-                balas.pop(balas.index(bala)) # se elimina la bala del impacto"""
+            if Virus.se_encuentra_con(bala):
+                #sonido_golpe.play() # al momento de impactar en el villano
+                bala.impacta_a(Virus)
+                balas.pop(balas.index(bala)) # se elimina la bala del impacto
 
             # movimiento de la bala dentro de los limites de la ventana
             if bala.x < ventana_x and bala.x > 0:
@@ -52,6 +52,8 @@ if __name__ == "__main__":
                 balas.append(Proyectil(round(self.x + self.ancho // 2), round(self.y + self.alto // 2), direccion, self.fuente))
             tanda = 1
 
+        
+
     # ----------------  Función para repintar el cuadro de juego -----------------
     def refresh():
         ventana.fill((107,171,242))
@@ -67,6 +69,9 @@ if __name__ == "__main__":
     repetir = True 
 
     # ------------------------- Ciclo de repeticion de todo el juego ---------------------------
+    # Si la bala impacta a un enemigo
+    
+
     while repetir:
         
 	    # Inicializacion de elementos del juego
@@ -85,7 +90,6 @@ if __name__ == "__main__":
             if timer==16: #Evita que el timer se salga de control LOL
                 timer=0
             ventana.fill((0,0,0))
-            print(timer)
             # Control de velocidad del juego
             reloj.tick(30)
 
@@ -109,6 +113,10 @@ if __name__ == "__main__":
 
             disparar(k, pygame.K_x , Dr, tanda_Dr, balas_Dr, 1, 3)
             disparar(k,pygame.K_RCTRL, Virus, tanda_Virus, balas_Virus, -1, 3)
+
+            #if Dr.se_encuentra_con(Virus)==True:
+            #    print("1")
+            
 
             # Repintar
             refresh()
