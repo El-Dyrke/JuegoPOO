@@ -30,10 +30,10 @@ if __name__ == "__main__":
         for bala in balas:
             if Virus.se_encuentra_con(bala):
                 #sonido_golpe.play() # al momento de impactar en el villano
-                bala.impacta_a(Virus)
+                #bala.impacta_a(Jugador)
                 balas.pop(balas.index(bala)) # se elimina la bala del impacto
 
-            # movimiento de la bala dentro de los limites de la ventana
+            # movimiento de la bala dentro de los limites de las ventana
             if bala.x < ventana_x and bala.x > 0:
                 bala.x += bala.velocidad
             else:
@@ -41,9 +41,9 @@ if __name__ == "__main__":
 
         # capturar evento del disparo
         if k[f] and tanda == 0 and timer%4==0:
-            if self.va_izquierda:
+            if self.last==self.camina_izquierda[0]:
                 direccion = -1
-            elif self.va_derecha:
+            elif self.last==self.camina_derecha[0]:
                 direccion = 1
             else:
                 direccion = default

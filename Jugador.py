@@ -19,7 +19,7 @@ class Jugador:
         self.camina_izquierda = [pygame.image.load(fuente + "izq1.png"), pygame.image.load(fuente + "izq2.png"), pygame.image.load(fuente + "izq3.png")]
         self.camina_arriba = [pygame.image.load(fuente + "arriba1.png"), pygame.image.load(fuente + "arriba2.png"), pygame.image.load(fuente + "arriba3.png")]
         self.camina_abajo = [pygame.image.load(fuente + "abajo1.png"), pygame.image.load(fuente + "abajo2.png"), pygame.image.load(fuente + "abajo3.png")]
-
+        self.last = pygame.image.load(fuente+"derecha1.png")
         self.contador_pasos = 0
 
         #Atributos
@@ -46,24 +46,27 @@ class Jugador:
         if self.contador_pasos + 1 > 15:
             self.contador_pasos = 0
         if self.va_izquierda:
-            
             self.escalar(self.camina_izquierda[self.contador_pasos//5], cuadro)
             self.contador_pasos += 1
+            self.last=self.camina_izquierda[0]
             
         elif self.va_derecha:
             self.escalar(self.camina_derecha[self.contador_pasos//5], cuadro)
             self.contador_pasos += 1
-            
+            self.last=self.camina_derecha[0]
+
         elif self.va_arriba:
             self.escalar(self.camina_arriba[self.contador_pasos//5], cuadro)
             self.contador_pasos += 1
-            
+            self.last=self.camina_arriba[0]
+
         elif self.va_abajo:
             self.escalar(self.camina_abajo[self.contador_pasos//5], cuadro)
             self.contador_pasos += 1
-            
+            self.last=self.camina_abajo[0]
+
         else:
-            self.escalar(self.quieto,cuadro)
+            self.escalar(self.last,cuadro)
             self.contador_pasos = 0
         
         #HITBOX
