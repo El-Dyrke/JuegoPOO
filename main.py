@@ -29,7 +29,7 @@ if __name__ == "__main__":
         # Contacto de proyectil con el enemigo
         for bala in balas:
             if otro.se_encuentra_con(bala):
-                #bala.impacta_a(Jugador)
+                bala.impacta_a(otro)
                 balas.pop(balas.index(bala)) # se elimina la bala del impacto
 
             # Limites movimiento bala
