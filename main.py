@@ -20,7 +20,6 @@ if __name__ == "__main__":
     puntaje = 0
     timer = 0 #Para la velocidad de disparo
     def disparar(k,f, self, otro, tanda, balas, default, maximo):
-        maximo=3
         # Manejo de los disparos
         if tanda > 0:
             tanda += 1
@@ -112,7 +111,6 @@ if __name__ == "__main__":
 
             #if Dr.se_encuentra_con(Virus)==True:
             #    print("1")
-            print("LOL")
 
             # Repintar
             refresh()
