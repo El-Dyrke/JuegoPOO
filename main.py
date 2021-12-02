@@ -21,7 +21,6 @@ if __name__ == "__main__":
     timer = 0 #Para la velocidad de disparo
 
     def disparar(k,f, self, otro, tanda, balas, default, maximo):
-        maximo=3
         # Manejo de los disparos
         if tanda > 0:
             tanda += 1
@@ -111,6 +110,12 @@ if __name__ == "__main__":
             disparar(k, pygame.K_x , Dr, Virus, tanda_Dr, balas_Dr, 1, 3)
             disparar(k,pygame.K_RCTRL, Virus, Dr, tanda_Virus, balas_Virus, -1, 3)
 
+<<<<<<< HEAD
+=======
+            #if Dr.se_encuentra_con(Virus)==True:
+            #    print("1")
+
+>>>>>>> 0e85708037c930ed29bc9808fc5d375eb879409d
             # Repintar
             refresh()
             
