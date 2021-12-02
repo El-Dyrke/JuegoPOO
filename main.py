@@ -19,25 +19,24 @@ if __name__ == "__main__":
     fuente=pygame.font.SysFont("segoe print", 22)
     puntaje = 0
     timer = 0 #Para la velocidad de disparo
-    def disparar(k,f, self, tanda, balas, default, maximo):
+    def disparar(k,f, self, otro, tanda, balas, default, maximo):
         maximo=3
         # Manejo de los disparos
         if tanda > 0:
             tanda += 1
         if tanda > 3:
             tanda = 0
-        #contacto de proyectil con el villano
+        # Contacto de proyectil con el enemigo
         for bala in balas:
-            if Virus.se_encuentra_con(bala):
-                #sonido_golpe.play() # al momento de impactar en el villano
+            if otro.se_encuentra_con(bala):
                 #bala.impacta_a(Jugador)
                 balas.pop(balas.index(bala)) # se elimina la bala del impacto
 
-            # movimiento de la bala dentro de los limites de las ventana
+            # Limites movimiento bala
             if bala.x < ventana_x and bala.x > 0:
                 bala.x += bala.velocidad
             else:
-                balas.pop(balas.index(bala)) # se elimina la bala fuera de la ventana
+                balas.pop(balas.index(bala)) # Se elimina bala
 
         # capturar evento del disparo
         if k[f] and tanda == 0 and timer%4==0:
@@ -69,9 +68,6 @@ if __name__ == "__main__":
     repetir = True 
 
     # ------------------------- Ciclo de repeticion de todo el juego ---------------------------
-    # Si la bala impacta a un enemigo
-    
-
     while repetir:
         
 	    # Inicializacion de elementos del juego
@@ -86,6 +82,7 @@ if __name__ == "__main__":
 
         esta_jugando=True
         while esta_jugando:
+
             timer+=1
             if timer==16: #Evita que el timer se salga de control LOL
                 timer=0
@@ -103,16 +100,14 @@ if __name__ == "__main__":
             #Movimiento jugadores
             Virus.move(k, pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, ventana_x, ventana_y)
             Dr.move(k, pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, ventana_x, ventana_y)
-
-            #Disparar
-            #Dr.disparar(k, pygame.K_c)
             
             # Cerrar el jugo con "esc"
             if k[pygame.K_ESCAPE]:
                 quit() 
 
-            disparar(k, pygame.K_x , Dr, tanda_Dr, balas_Dr, 1, 3)
-            disparar(k,pygame.K_RCTRL, Virus, tanda_Virus, balas_Virus, -1, 3)
+            #Disparar
+            disparar(k, pygame.K_x , Dr, Virus, tanda_Dr, balas_Dr, 1, 3)
+            disparar(k,pygame.K_RCTRL, Virus, Dr, tanda_Virus, balas_Virus, -1, 3)
 
             #if Dr.se_encuentra_con(Virus)==True:
             #    print("1")
