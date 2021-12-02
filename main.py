@@ -4,7 +4,7 @@ from Mapa import Mapa
 #from Partida import Partida
 from Proyectil import Proyectil
 import pygame
-
+#TEST
 pygame.init()
 
 if __name__ == "__main__":
@@ -110,12 +110,6 @@ if __name__ == "__main__":
             disparar(k, pygame.K_x , Dr, Virus, tanda_Dr, balas_Dr, 1, 3)
             disparar(k,pygame.K_RCTRL, Virus, Dr, tanda_Virus, balas_Virus, -1, 3)
 
-<<<<<<< HEAD
-=======
-            #if Dr.se_encuentra_con(Virus)==True:
-            #    print("1")
-
->>>>>>> 0e85708037c930ed29bc9808fc5d375eb879409d
             # Repintar
             refresh()
             
