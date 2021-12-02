@@ -21,6 +21,7 @@ class Jugador:
         self.camina_abajo = [pygame.image.load(fuente + "abajo1.png"), pygame.image.load(fuente + "abajo2.png"), pygame.image.load(fuente + "abajo3.png")]
         self.last = pygame.image.load(fuente+"derecha1.png")
         self.contador_pasos = 0
+        self.HP = pygame.image.load(fuente+"vida.png")
 
         # Atributos
         self.vida = 5
@@ -65,6 +66,18 @@ class Jugador:
         else:
             self.escalar(self.last,cuadro)
             self.contador_pasos = 0
+        
+        #"Barra" de vida
+        if self.vida==5:
+            cuadro.blit(pygame.transform.scale(self.HP, (self.ancho//5,self.alto//5)),(self.x+111,self.y-35))
+        if self.vida>=4:
+            cuadro.blit(pygame.transform.scale(self.HP, (self.ancho//5,self.alto//5)),(self.x+81,self.y-35))
+        if self.vida>=3:
+            cuadro.blit(pygame.transform.scale(self.HP, (self.ancho//5,self.alto//5)),(self.x+51,self.y-35))
+        if self.vida>=2:
+            cuadro.blit(pygame.transform.scale(self.HP, (self.ancho//5,self.alto//5)),(self.x+21,self.y-35))
+        if self.vida>=1:
+            cuadro.blit(pygame.transform.scale(self.HP, (self.ancho//5,self.alto//5)),(self.x-9,self.y-35))    
         
         # Hitbox
         self.zona_impacto = (self.x+15, self.y+15 , self.ancho-30, self.alto-30)
@@ -118,5 +131,7 @@ class Jugador:
 	    R2_iz = alguien.zona_impacto[0]
 	    R2_de = alguien.zona_impacto[0] + alguien.zona_impacto[2]
 	    return R1_de > R2_iz and R1_iz < R2_de and R1_ar < R2_ab and R1_ab > R2_ar and True
+
+    
 
     
