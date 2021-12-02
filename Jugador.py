@@ -35,7 +35,7 @@ class Jugador:
         self.max_disparos= 3
         self.balas = []
 
-        #HITBOX?
+        #HITBOX
         #self.zona_impacto = (self.x + 15, self.y + 10, 30, 50)
 
     def escalar(self, imagen, cuadro):
