@@ -44,7 +44,7 @@ class Jugador:
     def dibujar(self, cuadro):
 
         if self.contador_pasos + 1 > 15:
-            self.contador_pasos = 0
+            self.contador_pasos = 3
         if self.va_izquierda:
             self.escalar(self.camina_izquierda[self.contador_pasos//5], cuadro)
             self.contador_pasos += 1
