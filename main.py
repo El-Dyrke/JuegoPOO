@@ -111,7 +111,7 @@ if __name__ == "__main__":
 
             #if Dr.se_encuentra_con(Virus)==True:
             #    print("1")
-            
+            print("LOL")
 
             # Repintar
             refresh()
