@@ -79,6 +79,7 @@ if __name__ == "__main__":
         
         tanda_Virus = 0
         balas_Virus = []
+        #aaaaaaaa
 
         esta_jugando=True
         while esta_jugando:
