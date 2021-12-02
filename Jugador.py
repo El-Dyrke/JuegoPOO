@@ -1,18 +1,18 @@
-import Proyectil
 import pygame
 pygame.init()
 
 class Jugador:
-    def __init__(self, x, y, fuente, limite):#fuente Dr= img/Dr/ virus= img/Virus/
+    def __init__(self, x, y, fuente, limite):
 
-        #Movimiento
+        # Movimiento
         #self.camino = [100, limite]
         self.va_izquierda = False
         self.va_derecha = False
         self.va_arriba = False
         self.va_abajo = False
         self.contador_pasos= 0
-        #Sprites
+
+        # Sprites
         self.fuente = fuente
         self.quieto = pygame.image.load(fuente+"derecha1.png")
         self.camina_derecha = [pygame.image.load(fuente + "derecha1.png"), pygame.image.load(fuente + "derecha2.png"), pygame.image.load(fuente + "derecha3.png")]
@@ -22,7 +22,7 @@ class Jugador:
         self.last = pygame.image.load(fuente+"derecha1.png")
         self.contador_pasos = 0
 
-        #Atributos
+        # Atributos
         self.vida = 5
         self.x = x
         self.y = y
@@ -30,13 +30,10 @@ class Jugador:
         self.ancho = self.quieto.get_width()//2
         self.alto = self.quieto.get_height()//2
 
-         #Disparar
+        # Disparar
         self.ronda = 0
         self.max_disparos= 3
         self.balas = []
-
-        #HITBOX
-        #self.zona_impacto = (self.x + 15, self.y + 10, 30, 50)
 
     def escalar(self, imagen, cuadro):
         cuadro.blit(pygame.transform.scale(imagen, (self.ancho,self.alto)),(self.x,self.y))
@@ -69,13 +66,13 @@ class Jugador:
             self.escalar(self.last,cuadro)
             self.contador_pasos = 0
         
-        #HITBOX
+        # Hitbox
         self.zona_impacto = (self.x+15, self.y+15 , self.ancho-30, self.alto-30)
-        pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
+        #pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
 
     def move(self, k, iz, de, u, dw, ventana_x, ventana_y):
 
-        #Variables
+        # Variables
         self.iz = iz
         self.de = de
         self.u = u

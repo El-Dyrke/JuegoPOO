@@ -1,10 +1,8 @@
-from pygame.constants import K_x
 from Jugador import Jugador
 from Mapa import Mapa
 #from Partida import Partida
 from Proyectil import Proyectil
 import pygame
-#TEST
 pygame.init()
 
 if __name__ == "__main__":
@@ -67,7 +65,7 @@ if __name__ == "__main__":
     # Variable que controla la repeticion del juego completo con todas sus pantallas
     repetir = True 
 
-    # ------------------------- Ciclo de repeticion de todo el juego ---------------------------
+    # ------------------------- Ciclo de redefinicion de variables ---------------------------
     while repetir:
         
 	    # Inicializacion de elementos del juego
@@ -81,13 +79,17 @@ if __name__ == "__main__":
         tanda_Virus = 0
         balas_Virus = []
 
+        # Variable ciclo de juego
         esta_jugando=True
+        
+        #--------------------- Ciclo de Juego ---------------------------
         while esta_jugando:
 
             timer+=1
-            if timer==16: #Evita que el timer se salga de control LOL
+            if timer==16: # Evita que el timer se salga de control LOL
                 timer=0
             ventana.fill((0,0,0))
+
             # Control de velocidad del juego
             reloj.tick(30)
 
@@ -96,9 +98,9 @@ if __name__ == "__main__":
                 if evento.type == pygame.QUIT:
                     quit()
 
-            #Detectar teclas presionadas
+            # Detectar teclas presionadas
             k = pygame.key.get_pressed()
-            #Movimiento jugadores
+            # Movimiento jugadores
             Virus.move(k, pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, ventana_x, ventana_y)
             Dr.move(k, pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, ventana_x, ventana_y)
             
@@ -109,9 +111,6 @@ if __name__ == "__main__":
             #Disparar
             disparar(k, pygame.K_x , Dr, Virus, tanda_Dr, balas_Dr, 1, 3)
             disparar(k,pygame.K_RCTRL, Virus, Dr, tanda_Virus, balas_Virus, -1, 3)
-
-            #if Dr.se_encuentra_con(Virus)==True:
-            #    print("1")
 
             # Repintar
             refresh()
