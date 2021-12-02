@@ -19,6 +19,7 @@ if __name__ == "__main__":
     fuente=pygame.font.SysFont("segoe print", 22)
     puntaje = 0
     timer = 0 #Para la velocidad de disparo
+
     def disparar(k,f, self, otro, tanda, balas, default, maximo):
         maximo=3
         # Manejo de los disparos
@@ -74,12 +75,12 @@ if __name__ == "__main__":
         Dr = Jugador(int(0), int(0), "img/Dr/", ventana_x)
         Virus = Jugador(int(600), int(300), "img/Virus/", ventana_x)
 
+        # Variables para disparos
         tanda_Dr = 0
         balas_Dr=[]
         
         tanda_Virus = 0
         balas_Virus = []
-        #aaaaaaaa
 
         esta_jugando=True
         while esta_jugando:
@@ -109,10 +110,6 @@ if __name__ == "__main__":
             #Disparar
             disparar(k, pygame.K_x , Dr, Virus, tanda_Dr, balas_Dr, 1, 3)
             disparar(k,pygame.K_RCTRL, Virus, Dr, tanda_Virus, balas_Virus, -1, 3)
-
-            #if Dr.se_encuentra_con(Virus)==True:
-            #    print("1")
-            print("LOL")
 
             # Repintar
             refresh()
