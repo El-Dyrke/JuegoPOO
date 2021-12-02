@@ -70,7 +70,7 @@ class Jugador:
             self.contador_pasos = 0
         
         #HITBOX
-        self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
+        self.zona_impacto = (self.x+15, self.y+15 , self.ancho-30, self.alto-30)
         pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
 
     def move(self, k, iz, de, u, dw, ventana_x, ventana_y):
