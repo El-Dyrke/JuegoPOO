@@ -29,7 +29,7 @@ if __name__ == "__main__":
         # Contacto de proyectil con el enemigo
         for bala in balas:
             if otro.se_encuentra_con(bala):
-                #bala.impacta_a(Jugador)
+                bala.impacta_a(otro)
                 balas.pop(balas.index(bala)) # se elimina la bala del impacto
 
             # Limites movimiento bala
@@ -109,6 +109,9 @@ if __name__ == "__main__":
             #Disparar
             disparar(k, pygame.K_x , Dr, Virus, tanda_Dr, balas_Dr, 1, 3)
             disparar(k,pygame.K_RCTRL, Virus, Dr, tanda_Virus, balas_Virus, -1, 3)
+
+            #if Dr.se_encuentra_con(Virus)==True:
+            #    print("1")
 
             # Repintar
             refresh()

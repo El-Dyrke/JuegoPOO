@@ -1,4 +1,5 @@
 import pygame
+import Jugador
 pygame.init()
 
 class Proyectil:
@@ -8,9 +9,10 @@ class Proyectil:
         self.y = y
         
         self.velocidad = 15 * direccion
-
-        self.imagen= pygame.image.load(fuente+"disparo1.png")
-
+        if direccion==1:
+            self.imagen= pygame.image.load(fuente+"disparo1.png")
+        if direccion==-1:
+            self.imagen= pygame.image.load(fuente+"disparo2.png")
         self.ancho = self.imagen.get_width()//4
         self.alto = self.imagen.get_height()//4
         #pygame.transform.scale(imagen, (self.ancho,self.alto)
@@ -32,8 +34,11 @@ class Proyectil:
         self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
         pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
     
-    def impacta_a(self, alguien):
-        print("hit")
+    def impacta_a(self, otro):
+        if otro.vida > 0:
+            otro.vida -= 1
+            print(otro.vida)
+        
 
     
         
