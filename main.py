@@ -17,6 +17,7 @@ if __name__ == "__main__":
     fuente=pygame.font.SysFont("segoe print", 22)
     puntaje = 0
     timer = 0 #Para la velocidad de disparo
+    paredes1 = [(ventana_x//5, 0, ventana_x//11, ventana_y//3), (ventana_x//3*2, ventana_y//3*2, ventana_x//11, ventana_y//3 )]
 
     def disparar(k,f, self, otro, tanda, balas, default, maximo):
         # Manejo de los disparos
@@ -53,13 +54,24 @@ if __name__ == "__main__":
 
     # ----------------  Función para repintar el cuadro de juego -----------------
     def refresh():
+        # Fondo
         ventana.fill((107,171,242))
+
+        # Mapa
+        Map.dibujar(ventana)
+
+        # Jugadores
         Dr.dibujar(ventana)
         Virus.dibujar(ventana)
+
+        # Proyectiles
         for bala in balas_Dr:
             bala.dibujar(ventana)
+
         for bala in balas_Virus:
             bala.dibujar(ventana)
+
+        # Refrescar
         pygame.display.update()
 
     # Variable que controla la repeticion del juego completo con todas sus pantallas
@@ -68,9 +80,12 @@ if __name__ == "__main__":
     # ------------------------- Ciclo de redefinicion de variables ---------------------------
     while repetir:
         
-	    # Inicializacion de elementos del juego
-        Dr = Jugador(int(0), int(0), "img/Dr/", ventana_x)
-        Virus = Jugador(int(600), int(300), "img/Virus/", ventana_x)
+	    # Inicializar jugadores
+        Dr = Jugador(int(5), int(5), "img/Dr/", ventana_x)
+        Virus = Jugador(int(ventana_x-128), int(ventana_y-130), "img/Virus/", ventana_x)
+
+        # Inicializar mapa
+        Map = Mapa(paredes1)
 
         # Variables para disparos
         tanda_Dr = 0
