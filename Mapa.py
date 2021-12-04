@@ -1,4 +1,6 @@
 import pygame
+import Pared
+import Jugador
 pygame.init()
 
 class Mapa:
@@ -7,5 +9,8 @@ class Mapa:
 
     def dibujar(self, cuadro):
         for pared in self.paredes:
-            pygame.draw.rect(cuadro, (255,0,0), pared, 2)
-        #A definir en el proximo avance pues requiere PyGame
+            pygame.draw.rect(cuadro, (255,0,0), pared.zona_impacto, 2)
+    
+    def chocar_paredes(self, p):
+        for pared in self.paredes:
+            pared.se_encuentra_con(p)

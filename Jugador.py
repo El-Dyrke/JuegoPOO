@@ -1,4 +1,6 @@
 import pygame
+import Mapa
+import Pared
 pygame.init()
 
 class Jugador:
@@ -79,11 +81,23 @@ class Jugador:
         if self.vida>=1:
             cuadro.blit(pygame.transform.scale(self.HP, (self.ancho//5,self.alto//5)),(self.x-9,self.y-35))    
         
-        # Hitbox
         self.zona_impacto = (self.x+15, self.y+15 , self.ancho-30, self.alto-30)
         pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
 
-    def move(self, k, iz, de, u, dw, ventana_x, ventana_y):
+    def se_encuentra_con(self, alguien):
+        self.zona_impacto = (self.x+15, self.y+15 , self.ancho-30, self.alto-30)
+
+        R1_ab = self.zona_impacto[1] + self.zona_impacto[3]
+        R1_ar = self.zona_impacto[1]
+        R1_iz = self.zona_impacto[0]
+        R1_de = self.zona_impacto[0] + self.zona_impacto[2]
+        R2_ab = alguien.zona_impacto[1] + alguien.zona_impacto[3]
+        R2_ar = alguien.zona_impacto[1]
+        R2_iz = alguien.zona_impacto[0]
+        R2_de = alguien.zona_impacto[0] + alguien.zona_impacto[2]
+        return R1_de > R2_iz and R1_iz < R2_de and R1_ar < R2_ab and R1_ab > R2_ar and True
+
+    def move(self, k, iz, de, u, dw, ventana_x, ventana_y, Map):
 
         # Variables
         self.iz = iz
@@ -92,12 +106,12 @@ class Jugador:
         self.dw = dw
     
         # Movimiento a izquierda
-        if k[iz] and self.x > self.velocidad:
+        if k[iz] and self.x > self.velocidad and not(Map.chocar_paredes(self)):
             self.x -= self.velocidad
             self.va_izquierda = True
             self.va_derecha = False
 		# Movimiento a derecha
-        elif k[de] and self.x < ventana_x - self.ancho - self.velocidad:
+        elif k[de] and self.x < ventana_x - self.ancho - self.velocidad and not(Map.chocar_paredes(self)):
             self.x += self.velocidad
             self.va_derecha = True
             self.va_izquierda = False
@@ -107,12 +121,12 @@ class Jugador:
             self.va_derecha = False        
         
         # Movimiento a arriba 
-        if k[u] and self.y > self.velocidad:
+        if k[u] and self.y > self.velocidad and not(Map.chocar_paredes(self)):
             self.y -= self.velocidad
             self.va_arriba = True
             self.va_abajo = False
         # Movimiento a abajo
-        elif k[dw] and self.y < ventana_y - self.alto - self.velocidad:
+        elif k[dw] and self.y < ventana_y - self.alto - self.velocidad and not(Map.chocar_paredes(self)):
             self.y += self.velocidad
             self.va_abajo = True
             self.va_arriba = False
@@ -120,17 +134,8 @@ class Jugador:
         else:
             self.va_arriba = False
             self.va_abajo = False
-    
-    def se_encuentra_con(self, alguien):
-	    R1_ab = self.zona_impacto[1] + self.zona_impacto[3]
-	    R1_ar = self.zona_impacto[1]
-	    R1_iz = self.zona_impacto[0]
-	    R1_de = self.zona_impacto[0] + self.zona_impacto[2]
-	    R2_ab = alguien.zona_impacto[1] + alguien.zona_impacto[3]
-	    R2_ar = alguien.zona_impacto[1]
-	    R2_iz = alguien.zona_impacto[0]
-	    R2_de = alguien.zona_impacto[0] + alguien.zona_impacto[2]
-	    return R1_de > R2_iz and R1_iz < R2_de and R1_ar < R2_ab and R1_ab > R2_ar and True
+
+        
 
     
 

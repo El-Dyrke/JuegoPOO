@@ -24,7 +24,6 @@ class Proyectil:
     def impacta_a(self, otro):
         if otro.vida > 0:
             otro.vida -= 1
-            print(otro.vida)
         
 
     
