@@ -11,7 +11,7 @@ if __name__ == "__main__":
     ventana = pygame.display.set_mode((ventana_x,ventana_y))
 
     # Caption
-    pygame.display.set_caption("POO")
+    pygame.display.set_caption("Inoculacion")
     # Reloj
     reloj = pygame.time.Clock()
 

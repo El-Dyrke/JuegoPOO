@@ -12,7 +12,7 @@ class Pared:
     def dibujar(self, cuadro):
 
         self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
-        pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
+        pygame.draw.rect(cuadro, (255,255,255), self.zona_impacto, 5)
 
     def se_encuentra_con(self, alguien):
 
