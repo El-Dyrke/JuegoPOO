@@ -7,8 +7,8 @@ class Pared:
 
         self.x=x
         self.y=y
-        self.ancho= ventana_x //11
-        self.alto= ventana_y//3
+        self.ancho= 60
+        self.alto= ventana_y//4
         self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
     def dibujar(self, cuadro):
 

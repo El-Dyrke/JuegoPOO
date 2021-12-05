@@ -1,5 +1,4 @@
 from Jugador import Jugador
-from Mapa import Mapa
 from Pared import Pared
 from Proyectil import Proyectil
 import pygame
@@ -8,8 +7,8 @@ pygame.init()
 if __name__ == "__main__":
     
     # Variables ventan
-    ventana_x = 1050
-    ventana_y = 650
+    ventana_x = 1280
+    ventana_y = 720
     ventana = pygame.display.set_mode((ventana_x,ventana_y))
 
     # Caption
@@ -19,8 +18,9 @@ if __name__ == "__main__":
 
     timer = 0 #Para la velocidad de disparo
 
-    # Mapeado
-    paredes1 = [Pared(ventana_x//5, 0, ventana_x//11, ventana_y//3), Pared(ventana_x//3*2, ventana_y//3*2, ventana_x//11, ventana_y//3 )]
+    # sVariables fases de juego
+    intro = True
+    fin = False
 
     def disparar(k,f, self, otro, tanda, balas, default, maximo):
         # Manejo de los disparos
@@ -46,12 +46,7 @@ if __name__ == "__main__":
 
         # capturar evento del disparo
         if k[f] and tanda == 0 and timer%4==0:
-            if self.last==self.camina_izquierda[0]:
-                direccion = -1
-            elif self.last==self.camina_derecha[0]:
-                direccion = 1
-            else:
-                direccion = default
+            direccion = default
 
             if len(balas) < maximo: # balas en pantalla
                 balas.append(Proyectil(round(self.x + self.ancho // 2), round(self.y + self.alto // 2), direccion, self.fuente))
@@ -88,11 +83,9 @@ if __name__ == "__main__":
     # ------------------------- Ciclo de redefinicion de variables ---------------------------
     while repetir:
 	    # Inicializar jugadores
-        Dr = Jugador(int(5), int(5), "img/Dr/", ventana_x,timer)
-        Virus = Jugador(int(ventana_x-128), int(ventana_y-130), "img/Virus/", ventana_x,timer)
-        Par=Pared(int(ventana_x//5),int(0),ventana_x,ventana_y)
-        # Inicializar mapa
-        Map = Mapa(paredes1)
+        Dr = Jugador(int(5), int(36), "img/Dr/", ventana_x,timer)
+        Virus = Jugador(int(ventana_x-135), int(ventana_y-130), "img/Virus/", ventana_x,timer)
+        Par=Pared(int(ventana_x//2-30),int(ventana_y//2 - ventana_y//8),ventana_x,ventana_y)
         
         # Variables para disparos
         tanda_Dr = 0
@@ -105,10 +98,6 @@ if __name__ == "__main__":
         texto_intro = pygame.font.SysFont('Times New Roman', 40, True)
         texto_instrucciones = pygame.font.SysFont('console', 25, True)
         texto_resultado = pygame.font.SysFont('Times New Roman', 30, True)
-
-        #Variables fases de juego
-        intro = True
-        fin = False
 
         # Resultado
         ganaVirus = False
@@ -177,8 +166,9 @@ if __name__ == "__main__":
             # Detectar teclas presionadas
             k = pygame.key.get_pressed()
             # Movimiento jugadores
-            Virus.move(k, pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, ventana_x, ventana_y,timer)
-            Dr.move(k, pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, ventana_x, ventana_y,timer)
+            Dr.move(k, pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, ventana_x, ventana_y, 1)
+            Virus.move(k, pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, ventana_x, ventana_y, 2)
+            
             # Cerrar el jugo con "esc"
             if k[pygame.K_ESCAPE]:
                 quit() 
@@ -244,7 +234,7 @@ if __name__ == "__main__":
                 quit()
 
             if k[pygame.K_r]:
-                repetir = True
+                esta_jugando = True
                 fin=False
                 # Asegurar reinicio de jugadores
                 del(Dr)

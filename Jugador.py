@@ -7,7 +7,6 @@ class Jugador:
     def __init__(self, x, y, fuente, limite,timer):
 
         # Movimiento
-        #self.camino = [100, limite]
         self.va_izquierda = False
         self.va_derecha = False
         self.va_arriba = False
@@ -32,8 +31,8 @@ class Jugador:
         self.velocidad = 9
         self.ancho = self.quieto.get_width()//2
         self.alto = self.quieto.get_height()//2
-        self.lx = [0]
-        self.ly = []
+        self.lx = self.x
+        self.ly = self.y
         
 
         # Disparar
@@ -73,7 +72,7 @@ class Jugador:
             self.escalar(self.last,cuadro)
             self.contador_pasos = 0
         
-        #"Barra" de vida
+        # "Barra" de vida
         if self.vida==5:
             cuadro.blit(pygame.transform.scale(self.HP, (self.ancho//5,self.alto//5)),(self.x+111,self.y-35))
         if self.vida>=4:
@@ -86,10 +85,8 @@ class Jugador:
             cuadro.blit(pygame.transform.scale(self.HP, (self.ancho//5,self.alto//5)),(self.x-9,self.y-35))    
         
         self.zona_impacto = (self.x+15, self.y+15 , self.ancho-30, self.alto-30)
-        pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
 
     def se_encuentra_con(self, alguien):
-        #self.zona_impacto = (self.x+15, self.y+15 , self.ancho-30, self.alto-30)
 
         R1_ab = self.zona_impacto[1] + self.zona_impacto[3]
         R1_ar = self.zona_impacto[1]
@@ -101,37 +98,49 @@ class Jugador:
         R2_de = alguien.zona_impacto[0] + alguien.zona_impacto[2]
         return R1_de > R2_iz and R1_iz < R2_de and R1_ar < R2_ab and R1_ab > R2_ar and True
 
-    def move(self, k, iz, de, u, dw, ventana_x, ventana_y,timer):
+    def move(self, k, iz, de, u, dw, ventana_x, ventana_y, p):
         # Variables
         self.iz = iz
         self.de = de
         self.u = u
         self.dw = dw
-    
-        # Movimiento a izquierda
-        if k[iz] and self.x > self.velocidad:
-            self.x -= self.velocidad
-            self.va_izquierda = True
-            self.va_derecha = False
-            #for timer in self.lx:
-            #    print(timer)
-            #    self.lx.append=self.x
-		# Movimiento a derecha
-        elif k[de] and self.x < ventana_x - self.ancho - self.velocidad:
-            self.x += self.velocidad
-            self.va_derecha = True
-            self.va_izquierda = False
-            #for timer in range(len(self.lx)):
-            #    print(timer)
-            #    self.lx[timer] = self.x
 
-        # Detenerse horizontal
-        else:			
-            self.va_izquierda = False
-            self.va_derecha = False        
+        # Si es el jugador 1
+        if p == 1:
+            # Movimiento a izquierda
+            if k[iz] and self.x > self.velocidad:
+                self.x -= self.velocidad
+                self.va_izquierda = True
+                self.va_derecha = False
+            # Movimiento a derecha
+            elif k[de] and self.x < ventana_x//5*2 - self.ancho - self.velocidad:
+                self.x += self.velocidad
+                self.va_derecha = True
+                self.va_izquierda = False
+            # Detenerse horizontal
+            else:			
+                self.va_izquierda = False
+                self.va_derecha = False
+
+        # Si es el jugador 2
+        if p == 2:
+            # Movimiento a izquierda
+            if k[iz] and self.x > ventana_x//5*3:
+                self.x -= self.velocidad
+                self.va_izquierda = True
+                self.va_derecha = False
+            # Movimiento a derecha
+            elif k[de] and self.x < ventana_x - self.ancho - self.velocidad:
+                self.x += self.velocidad
+                self.va_derecha = True
+                self.va_izquierda = False
+            # Detenerse horizontal
+            else:			
+                self.va_izquierda = False
+                self.va_derecha = False        
         
         # Movimiento a arriba 
-        if k[u] and self.y > self.velocidad:
+        if k[u] and self.y > self.velocidad + self.alto//5 + 10:
             self.y -= self.velocidad
             self.va_arriba = True
             self.va_abajo = False
