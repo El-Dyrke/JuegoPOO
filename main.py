@@ -26,8 +26,9 @@ if __name__ == "__main__":
     def refresh():
         # Fondo
         fondo = pygame.transform.scale(pygame.image.load("img/Fondo.png"),(ventana_x, ventana_y))
+        grieta=pygame.image.load("img/Nose.png")
         ventana.blit(fondo, (0, 0))
-
+        ventana.blit(grieta,(513,0))
         # Mapa
         Par.dibujar(ventana)
         #Map.dibujar(ventana)
@@ -123,7 +124,6 @@ if __name__ == "__main__":
             if timer==16: # Evita que el timer se salga de control LOL
                 timer=0
             ventana.fill((0,0,0))
-
             # Control de velocidad del juego
             reloj.tick(30)
 
@@ -145,10 +145,6 @@ if __name__ == "__main__":
             # Disparar
             Jugador.disparar(k, pygame.K_x , Dr, Virus, tanda_Dr, balas_Dr, 1, 3,ventana_x,timer,Par)
             Jugador.disparar(k,pygame.K_RCTRL, Virus, Dr, tanda_Virus, balas_Virus, -1, 3,ventana_x,timer,Par)
-
-            # Chocar con las paredes
-            #if Dr.se_encuentra_con(Par):
-            #    Dr.x=Dr.lx[0]
 
             # Terminar juego
             if Virus.vida < 1:
