@@ -1,6 +1,4 @@
 import pygame
-import Pared
-import Jugador
 pygame.init()
 
 class Mapa:

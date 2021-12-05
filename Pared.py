@@ -1,5 +1,4 @@
 import pygame
-import Jugador
 pygame.init()
 
 class Pared:
