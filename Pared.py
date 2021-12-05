@@ -3,10 +3,24 @@ import Jugador
 pygame.init()
 
 class Pared:
-    def __init__(self, x, y, ancho, alto):
-        self.zona_impacto = (x, y , ancho, alto)
+    def __init__(self, x, y,ventana_x,ventana_y):
+
+        self.x=x
+        self.y=y
+        self.ancho= ventana_x //11
+        self.alto= ventana_y//3
+        self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
+    def dibujar(self, cuadro):
+
+        #for pared in self.paredes:
+        #    pygame.draw.rect(cuadro, (255,0,0), pared.zona_impacto, 2)
+
+
+        self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
+        pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
 
     def se_encuentra_con(self, alguien):
+        
         alguien.zona_impacto = (alguien.x+15, alguien.y+15 , alguien.ancho-30, alguien.alto-30)
 
         R1_ab = self.zona_impacto[1] + self.zona_impacto[3]
@@ -17,4 +31,6 @@ class Pared:
         R2_ar = alguien.zona_impacto[1]
         R2_iz = alguien.zona_impacto[0]
         R2_de = alguien.zona_impacto[0] + alguien.zona_impacto[2]
-        return R1_de > R2_iz and R1_iz < R2_de and R1_ar < R2_ab and R1_ab > R2_ar
+        
+        return R1_de > R2_iz and R1_iz < R2_de and R1_ar < R2_ab and R1_ab > R2_ar and True
+    

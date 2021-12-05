@@ -4,7 +4,7 @@ import Pared
 pygame.init()
 
 class Jugador:
-    def __init__(self, x, y, fuente, limite):
+    def __init__(self, x, y, fuente, limite,timer):
 
         # Movimiento
         #self.camino = [100, limite]
@@ -32,11 +32,15 @@ class Jugador:
         self.velocidad = 9
         self.ancho = self.quieto.get_width()//2
         self.alto = self.quieto.get_height()//2
+        self.lx = [0]
+        self.ly = []
+        
 
         # Disparar
         self.ronda = 0
         self.max_disparos= 3
         self.balas = []
+        self.zona_impacto=(self.x+15, self.y+15 , self.ancho-30, self.alto-30)
 
     def escalar(self, imagen, cuadro):
         cuadro.blit(pygame.transform.scale(imagen, (self.ancho,self.alto)),(self.x,self.y))
@@ -85,7 +89,7 @@ class Jugador:
         pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
 
     def se_encuentra_con(self, alguien):
-        self.zona_impacto = (self.x+15, self.y+15 , self.ancho-30, self.alto-30)
+        #self.zona_impacto = (self.x+15, self.y+15 , self.ancho-30, self.alto-30)
 
         R1_ab = self.zona_impacto[1] + self.zona_impacto[3]
         R1_ar = self.zona_impacto[1]
@@ -97,8 +101,7 @@ class Jugador:
         R2_de = alguien.zona_impacto[0] + alguien.zona_impacto[2]
         return R1_de > R2_iz and R1_iz < R2_de and R1_ar < R2_ab and R1_ab > R2_ar and True
 
-    def move(self, k, iz, de, u, dw, ventana_x, ventana_y, Map):
-
+    def move(self, k, iz, de, u, dw, ventana_x, ventana_y,timer):
         # Variables
         self.iz = iz
         self.de = de
@@ -106,27 +109,34 @@ class Jugador:
         self.dw = dw
     
         # Movimiento a izquierda
-        if k[iz] and self.x > self.velocidad and not(Map.chocar_paredes(self)):
+        if k[iz] and self.x > self.velocidad:
             self.x -= self.velocidad
             self.va_izquierda = True
             self.va_derecha = False
+            #for timer in self.lx:
+            #    print(timer)
+            #    self.lx.append=self.x
 		# Movimiento a derecha
-        elif k[de] and self.x < ventana_x - self.ancho - self.velocidad and not(Map.chocar_paredes(self)):
+        elif k[de] and self.x < ventana_x - self.ancho - self.velocidad:
             self.x += self.velocidad
             self.va_derecha = True
             self.va_izquierda = False
+            #for timer in range(len(self.lx)):
+            #    print(timer)
+            #    self.lx[timer] = self.x
+
         # Detenerse horizontal
         else:			
             self.va_izquierda = False
             self.va_derecha = False        
         
         # Movimiento a arriba 
-        if k[u] and self.y > self.velocidad and not(Map.chocar_paredes(self)):
+        if k[u] and self.y > self.velocidad:
             self.y -= self.velocidad
             self.va_arriba = True
             self.va_abajo = False
         # Movimiento a abajo
-        elif k[dw] and self.y < ventana_y - self.alto - self.velocidad and not(Map.chocar_paredes(self)):
+        elif k[dw] and self.y < ventana_y - self.alto - self.velocidad:
             self.y += self.velocidad
             self.va_abajo = True
             self.va_arriba = False
@@ -134,9 +144,6 @@ class Jugador:
         else:
             self.va_arriba = False
             self.va_abajo = False
-
         
-
-    
-
-    
+        
+      

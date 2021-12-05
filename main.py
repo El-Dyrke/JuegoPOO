@@ -1,4 +1,3 @@
-from pygame.constants import TIMER_RESOLUTION
 from Jugador import Jugador
 from Mapa import Mapa
 from Pared import Pared
@@ -35,6 +34,10 @@ if __name__ == "__main__":
                 bala.impacta_a(otro)
                 balas.pop(balas.index(bala)) # se elimina la bala del impacto
 
+            if Par.se_encuentra_con(bala):
+                #bala.impacta_a(otro)
+                balas.pop(balas.index(bala))
+
             # Limites movimiento bala
             if bala.x < ventana_x and bala.x > 0:
                 bala.x += bala.velocidad
@@ -62,7 +65,8 @@ if __name__ == "__main__":
         ventana.fill((107,171,242))
 
         # Mapa
-        Map.dibujar(ventana)
+        Par.dibujar(ventana)
+        #Map.dibujar(ventana)
 
         # Jugadores
         Dr.dibujar(ventana)
@@ -83,17 +87,16 @@ if __name__ == "__main__":
 
     # ------------------------- Ciclo de redefinicion de variables ---------------------------
     while repetir:
-        
 	    # Inicializar jugadores
-        Dr = Jugador(int(5), int(5), "img/Dr/", ventana_x)
-        Virus = Jugador(int(ventana_x-128), int(ventana_y-130), "img/Virus/", ventana_x)
-
+        Dr = Jugador(int(5), int(5), "img/Dr/", ventana_x,timer)
+        Virus = Jugador(int(ventana_x-128), int(ventana_y-130), "img/Virus/", ventana_x,timer)
+        Par=Pared(int(ventana_x//5),int(0),ventana_x,ventana_y)
         # Inicializar mapa
         Map = Mapa(paredes1)
-
+        
         # Variables para disparos
         tanda_Dr = 0
-        balas_Dr=[]
+        balas_Dr = []
         
         tanda_Virus = 0
         balas_Virus = []
@@ -157,7 +160,7 @@ if __name__ == "__main__":
         
         #--------------------- Ciclo de Juego ---------------------------
         while esta_jugando:
-
+            #print(Dr.lx[0])
             timer+=1
             if timer==16: # Evita que el timer se salga de control LOL
                 timer=0
@@ -174,9 +177,8 @@ if __name__ == "__main__":
             # Detectar teclas presionadas
             k = pygame.key.get_pressed()
             # Movimiento jugadores
-            Virus.move(k, pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, ventana_x, ventana_y, Map)
-            Dr.move(k, pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, ventana_x, ventana_y, Map)
-            
+            Virus.move(k, pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, ventana_x, ventana_y,timer)
+            Dr.move(k, pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, ventana_x, ventana_y,timer)
             # Cerrar el jugo con "esc"
             if k[pygame.K_ESCAPE]:
                 quit() 
@@ -186,7 +188,8 @@ if __name__ == "__main__":
             disparar(k,pygame.K_RCTRL, Virus, Dr, tanda_Virus, balas_Virus, -1, 3)
 
             # Chocar con las paredes
-            Map.chocar_paredes(Dr)
+            #if Dr.se_encuentra_con(Par):
+            #    Dr.x=Dr.lx[0]
 
             # Terminar juego
             if Virus.vida < 1:
@@ -249,5 +252,3 @@ if __name__ == "__main__":
                 
             
             pygame.display.update()
-            
-

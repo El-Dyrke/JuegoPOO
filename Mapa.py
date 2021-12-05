@@ -8,9 +8,10 @@ class Mapa:
         self.paredes= paredes
 
     def dibujar(self, cuadro):
-        for pared in self.paredes:
-            pygame.draw.rect(cuadro, (255,0,0), pared.zona_impacto, 2)
+        print("oi")
+    
     
     def chocar_paredes(self, p):
-        for pared in self.paredes:
-            pared.se_encuentra_con(p)
+    #    for pared in self.paredes:
+    #        pared.se_encuentra_con(p)
+        print("")
