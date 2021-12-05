@@ -11,16 +11,10 @@ class Pared:
         self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
     def dibujar(self, cuadro):
 
-        #for pared in self.paredes:
-        #    pygame.draw.rect(cuadro, (255,0,0), pared.zona_impacto, 2)
-
-
         self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
         pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
 
     def se_encuentra_con(self, alguien):
-        
-        alguien.zona_impacto = (alguien.x+15, alguien.y+15 , alguien.ancho-30, alguien.alto-30)
 
         R1_ab = self.zona_impacto[1] + self.zona_impacto[3]
         R1_ar = self.zona_impacto[1]
