@@ -143,8 +143,8 @@ if __name__ == "__main__":
                 quit() 
 
             # Disparar
-            Jugador.disparar(k, pygame.K_x , Dr, Virus, tanda_Dr, balas_Dr, 1, 3,ventana_x,timer)
-            Jugador.disparar(k,pygame.K_RCTRL, Virus, Dr, tanda_Virus, balas_Virus, -1, 3,ventana_x,timer)
+            Jugador.disparar(k, pygame.K_x , Dr, Virus, tanda_Dr, balas_Dr, 1, 3,ventana_x,timer,Par)
+            Jugador.disparar(k,pygame.K_RCTRL, Virus, Dr, tanda_Virus, balas_Virus, -1, 3,ventana_x,timer,Par)
 
             # Chocar con las paredes
             #if Dr.se_encuentra_con(Par):

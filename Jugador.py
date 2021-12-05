@@ -152,7 +152,7 @@ class Jugador:
             self.va_arriba = False
             self.va_abajo = False
         
-    def disparar(k,f, self, otro, tanda, balas, default, maximo,ventana_x,timer):
+    def disparar(k,f, self, otro, tanda, balas, default, maximo,ventana_x,timer,Par):
         # Manejo de los disparos
         if tanda > 0:
             tanda += 1
@@ -163,6 +163,9 @@ class Jugador:
             if otro.se_encuentra_con(bala):
                 bala.impacta_a(otro)
                 balas.pop(balas.index(bala)) # se elimina la bala del impacto
+
+            if Par.se_encuentra_con(bala):
+                balas.pop(balas.index(bala))
 
             # Limites movimiento bala
             if bala.x < ventana_x and bala.x > 0:
