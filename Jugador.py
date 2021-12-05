@@ -1,6 +1,7 @@
 import pygame
 import Mapa
 import Pared
+from Proyectil import Proyectil
 pygame.init()
 
 class Jugador:
@@ -154,5 +155,29 @@ class Jugador:
             self.va_arriba = False
             self.va_abajo = False
         
-        
+    def disparar(k,f, self, otro, tanda, balas, default, maximo,ventana_x,timer):
+        # Manejo de los disparos
+        if tanda > 0:
+            tanda += 1
+        if tanda > 3:
+            tanda = 0
+        # Contacto de proyectil con el enemigo
+        for bala in balas:
+            if otro.se_encuentra_con(bala):
+                bala.impacta_a(otro)
+                balas.pop(balas.index(bala)) # se elimina la bala del impacto
+
+            # Limites movimiento bala
+            if bala.x < ventana_x and bala.x > 0:
+                bala.x += bala.velocidad
+            else:
+                balas.pop(balas.index(bala)) # Se elimina bala
+
+        # capturar evento del disparo
+        if k[f] and tanda == 0 and timer%4==0:
+            direccion = default
+
+            if len(balas) < maximo: # balas en pantalla
+                balas.append(Proyectil(round(self.x + self.ancho // 2), round(self.y + self.alto // 2), direccion, self.fuente))
+            tanda = 1
       
