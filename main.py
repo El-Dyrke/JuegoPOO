@@ -25,7 +25,8 @@ if __name__ == "__main__":
     # ----------------  Función para repintar el cuadro de juego -----------------
     def refresh():
         # Fondo
-        ventana.fill((107,171,242))
+        fondo = pygame.transform.scale(pygame.image.load("img/Fondo.png"),(ventana_x, ventana_y))
+        ventana.blit(fondo, (0, 0))
 
         # Mapa
         Par.dibujar(ventana)
