@@ -1,6 +1,4 @@
 import pygame
-import Mapa
-import Pared
 from Proyectil import Proyectil
 pygame.init()
 
@@ -35,7 +33,6 @@ class Jugador:
         self.lx = self.x
         self.ly = self.y
         
-
         # Disparar
         self.ronda = 0
         self.max_disparos= 3

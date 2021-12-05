@@ -1,5 +1,4 @@
 import pygame
-import Jugador
 pygame.init()
 
 class Pared:
@@ -11,11 +10,7 @@ class Pared:
         self.alto= ventana_y//4
         self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
     def dibujar(self, cuadro):
-
-        #for pared in self.paredes:
-        #    pygame.draw.rect(cuadro, (255,0,0), pared.zona_impacto, 2)
-
-
+        
         self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
         pygame.draw.rect(cuadro, (255,0,0), self.zona_impacto, 2)
 
