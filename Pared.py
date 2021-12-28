@@ -9,6 +9,7 @@ class Pared:
         self.ancho= 60
         self.alto= ventana_y//4
         self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
+        self.timer=0
     def dibujar(self, cuadro):
 
         self.zona_impacto = (self.x, self.y , self.ancho, self.alto)
@@ -27,3 +28,11 @@ class Pared:
         
         return R1_de > R2_iz and R1_iz < R2_de and R1_ar < R2_ab and R1_ab > R2_ar and True
     
+    def movPar(self):
+        if self.timer<108:
+            self.y=self.y+5
+        if self.timer>108:
+            self.y=self.y-5
+        if self.timer==216:
+            self.timer=0
+        self.timer= self.timer+1

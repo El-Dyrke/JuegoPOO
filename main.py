@@ -55,7 +55,7 @@ if __name__ == "__main__":
 	    # Inicializar jugadores
         Dr = Jugador(int(5), int(36), "img/Dr/", ventana_x,timer)
         Virus = Jugador(int(ventana_x-135), int(ventana_y-130), "img/Virus/", ventana_x,timer)
-        Par=Pared(int(ventana_x//2-30),int(ventana_y//2 - ventana_y//8),ventana_x,ventana_y)
+        Par=Pared(int(ventana_x//2-30),int(0),ventana_x,ventana_y)
         
         # Variables para disparos
         tanda_Dr = 0
@@ -89,10 +89,19 @@ if __name__ == "__main__":
             titulo = texto_intro.render('INOCULACION', 1, (226, 228, 238))
             instrucciones = texto_instrucciones.render('Presione ENTER para jugar', 1, (2, 5, 15))
             instrucciones2 = texto_instrucciones.render('Presione ESC en cualquier momento para salir', 1, (2, 5, 15))
-            
+            instruccionesV = texto_instrucciones.render('Virus: Flechas + Ctrl', 1, (2, 5, 15))
+            instruccionesD = texto_instrucciones.render('Doctor: WASD + X', 1, (2, 5, 15))
+            Jugador2 = texto_instrucciones.render('Jugador 2', 1, (2, 5, 15))
+            Jugador1 = texto_instrucciones.render('Jugador 1', 1, (2, 5, 15))
+
             ventana.blit(titulo, ((ventana_x//2)-titulo.get_width()//2, 50))
             ventana.blit(instrucciones, ((ventana_x//2)-instrucciones.get_width()//2, 300))
             ventana.blit(instrucciones2, ((ventana_x//2)-instrucciones2.get_width()//2, 340))
+            ventana.blit(instruccionesV, ((ventana_x-50)-instruccionesV.get_width(), 600))
+            ventana.blit(instruccionesD, (instruccionesD.get_width()//4, 600))
+            ventana.blit(Jugador2, ((ventana_x-50)-instruccionesV.get_width()+90, 572))
+            ventana.blit(Jugador1, (instruccionesD.get_width()//4+60, 572))
+            
 
             k = pygame.key.get_pressed()
 
@@ -124,6 +133,10 @@ if __name__ == "__main__":
             if timer==16: # Evita que el timer se salga de control LOL
                 timer=0
             ventana.fill((0,0,0))
+
+
+            Par.movPar()
+
             # Control de velocidad del juego
             reloj.tick(30)
 
